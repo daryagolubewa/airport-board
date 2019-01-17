@@ -7,7 +7,7 @@ export default class Flights extends Component {
     console.log('yes', this.props.getFlightInfo)
     return (
       <ReactTable
-        getFlightInfo={this.props.getFlightInfo}
+        data={this.props.getFlightInfo}
         columns={[
           {
             columns: [
@@ -30,6 +30,10 @@ export default class Flights extends Component {
               {
                 Header: "Status",
                 accessor: "status"
+              },
+              {
+                Header: "Type",
+                accessor: "type"
               },
             ]
           }
