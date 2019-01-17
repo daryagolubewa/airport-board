@@ -9,8 +9,10 @@ import App from './components/app/app';
 const history = createBrowserHistory();
 
 const store = createStore(
-  reducers(history)
+  reducers(history),
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
 
 const Index = () => (
   <Provider store={ store }>

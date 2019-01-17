@@ -17,15 +17,30 @@ const mapDispatchToProps = dispatch => ({
  getFlights: flights => dispatch(getFlightsInfoAC(flights))
 });
 
+class App extends Component {
 
+  async componentDidMount() {
+    const { getFlights } = this.props;
+    const arriveUrl = 'https://aviation-edge.com/v2/public/timetable?key=c2d44c-455a0a&iataCode=JFK&type=arrival';
+    const res = await fetch(arriveUrl);
+    let arrivalInfo = await res.json();
+    const arrivedFlights = arrivalInfo.map(info => {
+      return {
+        time: info.arrival.scheduledTime,
+        airport: info.arrival.iataCode,
+        airline: info.airline.name,
+        flightNumber: info.flight.number,
+        status: info.status,
+        type: info.type
+      }
+    });
+    console.log('aa', arrivedFlights);
+    getFlights(arrivedFlights);
 
-export default class App extends Component {
-
-  // async ComponentDidMount() {
-  //   const { getFlights } = this.props;
-  // }
+  }
 
   render() {
+    console.log('fkss', this.props);
     return (
       <div >
         <header >
@@ -66,9 +81,15 @@ export default class App extends Component {
           </Navbar>
         </header>
           <Grid>
-            <Flights />
+            <Flights getFlightInfo={this.props.getFlightInfo}/>
           </Grid>
       </div>
     );
   }
 };
+
+const MainPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
+export default MainPage;

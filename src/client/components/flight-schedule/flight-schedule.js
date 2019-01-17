@@ -4,9 +4,10 @@ import "react-table/react-table.css";
 
 export default class Flights extends Component {
   render() {
+    console.log('yes', this.props.getFlightInfo)
     return (
       <ReactTable
-        // data={this.props.flightsInfo}
+        getFlightInfo={this.props.getFlightInfo}
         columns={[
           {
             columns: [
@@ -15,8 +16,8 @@ export default class Flights extends Component {
                 accessor: "time"
               },
               {
-                Header: "City",
-                accessor: "city"
+                Header: "Airport",
+                accessor: "airport"
               },
               {
                 Header: "Airline",
@@ -33,7 +34,7 @@ export default class Flights extends Component {
             ]
           }
         ]}
-        defaultPageSize={10}
+        defaultPageSize={20}
         className="-striped -highlight"
       />
 

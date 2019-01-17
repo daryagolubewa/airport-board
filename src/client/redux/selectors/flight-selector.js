@@ -1,1 +1,1 @@
-export const selectGetFlightsInfo = state => (state.flightsInfo.flightsInfo);
+export const selectGetFlightsInfo = state => (state.flights.flightsInfo);
